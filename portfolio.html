@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Rehan — Senior Android Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #12151A;
+    --bg-raised: #1A1F26;
+    --panel-border: #2A313B;
+    --text-hi: #EDEEF0;
+    --text-lo: #8A93A0;
+    --kotlin: #A472FF;
+    --android: #3DDC84;
+    --amber: #FFB454;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--text-hi);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  ::selection{ background:var(--kotlin); color:#fff; }
+
+  a{ color:inherit; }
+
+  .wrap{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(18,21,26,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--panel-border);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .logo{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+    font-size:15px;
+    color:var(--text-hi);
+  }
+  .logo span{ color:var(--android); }
+  .navlinks{ display:flex; gap:28px; font-size:14px; }
+  .navlinks a{
+    color:var(--text-lo);
+    text-decoration:none;
+    transition:color .2s ease;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible{ color:var(--text-hi); }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding:88px 0 64px;
+    position:relative;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--android);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:20px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:8px; height:8px; border-radius:50%;
+    background:var(--android);
+    box-shadow:0 0 0 4px rgba(61,220,132,0.15);
+  }
+  h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:clamp(38px, 6vw, 58px);
+    font-weight:700;
+    letter-spacing:-0.02em;
+    line-height:1.05;
+    margin-bottom:14px;
+  }
+  h1 .accent{ color:var(--kotlin); }
+  .role{
+    font-size:19px;
+    color:var(--text-lo);
+    max-width:540px;
+    margin-bottom:34px;
+  }
+  .role strong{ color:var(--text-hi); font-weight:500; }
+
+  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:56px; }
+  .btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    padding:11px 20px;
+    border-radius:8px;
+    text-decoration:none;
+    border:1px solid var(--panel-border);
+    transition:all .2s ease;
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{
+    background:var(--android);
+    color:#0A0D0F;
+    border-color:var(--android);
+    font-weight:700;
+  }
+  .btn-primary:hover{ box-shadow:0 0 0 3px rgba(61,220,132,0.2); }
+  .btn-ghost{ color:var(--text-lo); }
+  .btn-ghost:hover{ color:var(--text-hi); border-color:var(--text-lo); }
+
+  /* terminal / build panel */
+  .console{
+    background:var(--bg-raised);
+    border:1px solid var(--panel-border);
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 20px 60px -20px rgba(0,0,0,0.6);
+  }
+  .console-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:11px 16px;
+    border-bottom:1px solid var(--panel-border);
+  }
+  .dot{ width:10px; height:10px; border-radius:50%; }
+  .dot.r{ background:#FF5F57; }
+  .dot.y{ background:#FEBC2E; }
+  .dot.g{ background:#28C840; }
+  .console-title{
+    margin-left:8px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--text-lo);
+  }
+  .console-body{
+    padding:20px 22px 24px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:#B9C2CE;
+  }
+  .console-body .line{ margin-bottom:7px; white-space:pre-wrap; }
+  .console-body .prompt{ color:var(--kotlin); }
+  .console-body .ok{ color:var(--android); }
+  .console-body .comment{ color:var(--text-lo); }
+  .console-stats{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:16px;
+    margin-top:18px;
+    padding-top:18px;
+    border-top:1px dashed var(--panel-border);
+  }
+  .stat b{
+    display:block;
+    font-family:'Space Grotesk', sans-serif;
+    font-size:24px;
+    color:var(--text-hi);
+  }
+  .stat span{ font-size:12px; color:var(--text-lo); }
+
+  /* ---------- SECTION HEADS ---------- */
+  section{ padding:56px 0; border-top:1px solid var(--panel-border); }
+  .sec-head{
+    display:flex; align-items:baseline; gap:12px;
+    margin-bottom:34px;
+  }
+  .sec-tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--text-lo);
+  }
+  .sec-head h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:26px;
+    font-weight:600;
+  }
+
+  /* ---------- EXPERIENCE AS RELEASE NOTES ---------- */
+  .release{
+    display:grid;
+    grid-template-columns:96px 1fr;
+    gap:24px;
+    padding:24px 0;
+    border-bottom:1px solid var(--panel-border);
+  }
+  .release:last-child{ border-bottom:none; }
+  .version{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+    font-size:15px;
+    color:var(--kotlin);
+    padding-top:2px;
+  }
+  .version .tag{
+    display:inline-block;
+    margin-top:8px;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:0.04em;
+    padding:2px 7px;
+    border-radius:4px;
+    background:rgba(61,220,132,0.12);
+    color:var(--android);
+  }
+  .release-body h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:19px;
+    font-weight:600;
+    margin-bottom:2px;
+  }
+  .release-meta{
+    font-size:13px;
+    color:var(--text-lo);
+    margin-bottom:12px;
+  }
+  .release ul{ list-style:none; }
+  .release li{
+    position:relative;
+    padding-left:18px;
+    font-size:14.5px;
+    color:#C4CBD4;
+    margin-bottom:6px;
+  }
+  .release li::before{
+    content:"+";
+    position:absolute; left:0;
+    color:var(--android);
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skill-groups{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:24px;
+  }
+  .skill-group h4{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--text-lo);
+    margin-bottom:12px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+  }
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chip{
+    font-size:13px;
+    padding:6px 12px;
+    border-radius:20px;
+    border:1px solid var(--panel-border);
+    background:var(--bg-raised);
+    color:#D5DAE1;
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .projects{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:18px;
+  }
+  .card{
+    background:var(--bg-raised);
+    border:1px solid var(--panel-border);
+    border-radius:12px;
+    padding:22px;
+    transition:transform .2s ease, border-color .2s ease;
+  }
+  .card:hover{ transform:translateY(-3px); border-color:#3A4451; }
+  .card .kicker{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--text-lo);
+    margin-bottom:10px;
+  }
+  .card h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:17px;
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .card p{ font-size:14px; color:var(--text-lo); }
+
+  /* ---------- CONTACT ---------- */
+  footer{
+    padding:64px 0 80px;
+    border-top:1px solid var(--panel-border);
+  }
+  footer h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:clamp(28px,4vw,40px);
+    font-weight:700;
+    margin-bottom:16px;
+  }
+  footer p{ color:var(--text-lo); margin-bottom:28px; max-width:480px; }
+  .contact-row{ display:flex; gap:14px; flex-wrap:wrap; }
+  .foot-note{
+    margin-top:48px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:#535B66;
+  }
+
+  @media (max-width:640px){
+    .console-stats{ grid-template-columns:repeat(2,1fr); }
+    .release{ grid-template-columns:1fr; }
+    .version{ display:flex; align-items:center; gap:10px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">rehan<span>.apk</span></div>
+    <div class="navlinks">
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">BUILD SUCCESSFUL — OPEN TO WORK</div>
+    <h1>Muhammad Rehan<br>builds Android <span class="accent">apps that ship.</span></h1>
+    <p class="role">Senior Android Developer in Lahore, Pakistan with <strong>5.5+ years</strong> across Kotlin, Jetpack Compose, and Flutter — from ride-hailing apps to secure, encrypted, server-driven forms.</p>
+
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="mailto:hafizrehanjamil@gmail.com">Get in touch →</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/rehan-jamil-31404015b/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" href="tel:03226593097">03226593097</a>
+    </div>
+
+    <div class="console">
+      <div class="console-bar">
+        <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+        <div class="console-title">gradle — build.log</div>
+      </div>
+      <div class="console-body">
+        <div class="line"><span class="prompt">$</span> ./gradlew assembleCareer --profile=senior</div>
+        <div class="line comment">// resolving dependencies...</div>
+        <div class="line">kotlin, jetpack-compose, flutter, kmp, room, retrofit</div>
+        <div class="line ok">✓ BUILD SUCCESSFUL in 5y 9mo</div>
+        <div class="console-stats">
+          <div class="stat"><b>5.5+</b><span>years experience</span></div>
+          <div class="stat"><b>3</b><span>companies</span></div>
+          <div class="stat"><b>7+</b><span>apps shipped</span></div>
+          <div class="stat"><b>2</b><span>platforms (Native + Flutter)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag">01</span>
+      <h2>Release history</h2>
+    </div>
+
+    <div class="release">
+      <div class="version">v3.0.0<span class="tag">CURRENT</span></div>
+      <div class="release-body">
+        <h3>Senior Android Developer</h3>
+        <div class="release-meta">Ozoned Digital · Jun 2024 — Present</div>
+        <ul>
+          <li>Built modern UI with Jetpack Compose</li>
+          <li>Implemented server-driven forms for flexible, backend-controlled UI</li>
+          <li>Added encryption / decryption for sensitive data handling</li>
+          <li>Set up SSL pinning to harden network security</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="version">v2.0.0</div>
+      <div class="release-body">
+        <h3>Software Engineer, Mobile Developer</h3>
+        <div class="release-meta">Dtechsystems.co · Nov 2021 — May 2024 · Lahore, Pakistan</div>
+        <ul>
+          <li>Shipped GoCar Android, a ride-hailing application</li>
+          <li>Designed screens and consumed REST APIs end-to-end</li>
+          <li>Built Homemade App from the ground up</li>
+          <li>Delivered API integrations and subscription implementation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="release">
+      <div class="version">v1.0.0</div>
+      <div class="release-body">
+        <h3>Android Developer</h3>
+        <div class="release-meta">Digicon Valley · Oct 2020 — Nov 2021 · Lahore, Pakistan</div>
+        <ul>
+          <li>Built Foody Bird Delivery Boy, Vendor, and User apps</li>
+          <li>Delivered a three-sided food delivery platform end to end</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag">02</span>
+      <h2>Toolchain</h2>
+    </div>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h4>Languages</h4>
+        <div class="chips">
+          <span class="chip">Kotlin</span>
+          <span class="chip">Java</span>
+          <span class="chip">Dart</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Frameworks</h4>
+        <div class="chips">
+          <span class="chip">Jetpack Compose</span>
+          <span class="chip">Flutter</span>
+          <span class="chip">KMP</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Architecture</h4>
+        <div class="chips">
+          <span class="chip">MVVM</span>
+          <span class="chip">Clean Architecture</span>
+          <span class="chip">Kotlin Flows</span>
+          <span class="chip">State Flows</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Data & Networking</h4>
+        <div class="chips">
+          <span class="chip">Room</span>
+          <span class="chip">Retrofit</span>
+          <span class="chip">Volley</span>
+          <span class="chip">Firebase</span>
+          <span class="chip">Firestore</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Platform</h4>
+        <div class="chips">
+          <span class="chip">Maps</span>
+          <span class="chip">3rd-party APIs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-tag">03</span>
+      <h2>Side builds</h2>
+    </div>
+    <div class="projects">
+      <div class="card">
+        <div class="kicker">FLUTTER · LIVE ON GOOGLE PLAY</div>
+        <h3>Journey Joy</h3>
+        <p>Shared-ride Flutter app connecting passengers and drivers for daily commutes in Riyadh, Saudi Arabia, with real-time ride search and direct rider support.</p>
+        <p style="margin-top:10px; display:flex; gap:16px; flex-wrap:wrap;">
+          <a href="https://play.google.com/store/apps/details?id=app.journeyjoy.student&hl=en-US" target="_blank" rel="noopener" style="color:var(--android); font-family:'JetBrains Mono', monospace; font-size:12.5px; text-decoration:none;">View on Google Play →</a>
+          <a href="https://apps.apple.com/sa/app/journey-joy/id6747132253" target="_blank" rel="noopener" style="color:var(--kotlin); font-family:'JetBrains Mono', monospace; font-size:12.5px; text-decoration:none;">View on App Store →</a>
+        </p>
+      </div>
+      <div class="card">
+        <div class="kicker">FLUTTER · LIVE ON APP STORE</div>
+        <h3>Journey Joy Partner</h3>
+        <p>Companion driver app for the Journey Joy shared-ride ecosystem — lets drivers accept and manage trips along their daily route with weekly, KSA-compliant payouts.</p>
+        <p style="margin-top:10px;">
+          <a href="https://apps.apple.com/ca/app/journey-joy-partner/id6747132364" target="_blank" rel="noopener" style="color:var(--kotlin); font-family:'JetBrains Mono', monospace; font-size:12.5px; text-decoration:none;">View on App Store →</a>
+        </p>
+      </div>
+      <div class="card">
+        <div class="kicker">AUG 2020 — SEP 2020</div>
+        <h3>Social App (Instagram-style)</h3>
+        <p>Firebase-backed app with likes, follows, posting, and user search, modeled on core Instagram flows.</p>
+      </div>
+      <div class="card">
+        <div class="kicker">AUG 2020 — SEP 2021</div>
+        <h3>LGU Circle</h3>
+        <p>Three-role platform for admin, teacher, and student with in-app messaging and an idea-submission workflow reviewed by admins.</p>
+      </div>
+      <div class="card">
+        <div class="kicker">JAN 2022 — FEB 2022</div>
+        <h3>FC Ranking</h3>
+        <p>User/admin app where users propose characters for admin approval, with comments and likes on each character.</p>
+      </div>
+      <div class="card">
+        <div class="kicker">AUG 2020 — SEP 2021</div>
+        <h3>Eserve</h3>
+        <p>Services marketplace connecting medical officers and mechanics with users needing emergency medical or vehicle repair help.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's build something.</h2>
+    <p>Open to Senior Android and Flutter roles — native, cross-platform, or KMP. Based in Lahore, available for remote work.</p>
+    <div class="contact-row">
+      <a class="btn btn-primary" href="mailto:hafizrehanjamil@gmail.com">hafizrehanjamil@gmail.com</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/rehan-jamil-31404015b/" target="_blank" rel="noopener">linkedin.com/in/rehan-jamil</a>
+      <a class="btn btn-ghost" href="tel:03226593097">03226593097</a>
+    </div>
+    <div class="foot-note">// urdu 80/100 · english 60/100 · interests: IoT, Flutter, Kotlin Multiplatform</div>
+  </div>
+</footer>
+
+</body>
+</html>
